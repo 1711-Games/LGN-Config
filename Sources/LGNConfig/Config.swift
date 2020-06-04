@@ -3,7 +3,7 @@ import Logging
 
 public protocol AnyConfigKey: Hashable, RawRepresentable, CaseIterable where RawValue == String {}
 
-struct Config<Key: AnyConfigKey> {
+public struct Config<Key: AnyConfigKey> {
     public enum E: Error {
         /// An error reporting missing config entries, holds an array of missing keys
         case MissingEntries([Key])
