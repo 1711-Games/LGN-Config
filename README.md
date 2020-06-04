@@ -50,3 +50,21 @@ let HTTPPort: String? = config["HTTP_PORT"]
 ```
 
 This call returns optional string because of obvious reasons.
+
+## Vapor compatibility
+If you'd like to use it in a Vapor 4 project, you may create this handy extension which would accept `Environment` instead of `isLocal`, and so local config would be used only in `.development` environment:
+
+```swift
+import LGNConfig
+import Vapor
+
+public extension Config {
+    init(
+        rawConfig: [AnyHashable: String] = ProcessInfo.processInfo.environment,
+        env: Environment,
+        localConfig: [Key: String] = [:]
+    ) throws {
+        try self.init(rawConfig: rawConfig, isLocal: env == Environment.development, localConfig: localConfig)
+    }
+}
+```
