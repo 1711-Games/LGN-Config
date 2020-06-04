@@ -64,8 +64,16 @@ public struct Config<Key: AnyConfigKey> {
 
     /// Returns value for given raw string key
     ///
-    /// This method return `Optional<String>` because of raw `String` key argument. If you know config key at
-    /// compile time and want non-optional result value, please use `subscript` access method.
+    /// This subscript returns `Optional<String>` because of raw `String` key argument. If you know config key at
+    /// compile time and want non-optional result value, please use `subscript[key: Key]` access method.
+    public subscript(rawKey: String) -> String? {
+        self.get(rawKey)
+    }
+
+    /// Returns value for given raw string key
+    ///
+    /// This method returns `Optional<String>` because of raw `String` key argument. If you know config key at
+    /// compile time and want non-optional result value, please use `subscript[key: Key]` access method.
     public func get(_ rawKey: String) -> String? {
         guard let key = Key(rawValue: rawKey) else {
             return nil

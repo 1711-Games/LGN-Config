@@ -32,6 +32,7 @@ final class LGNConfigTests: XCTestCase {
             ]
         )
         XCTAssertEqual(instance1.get("FOO"), String?("foo_val_local"))
+        XCTAssertEqual(instance1["FOO"], String?("foo_val_local"))
         XCTAssertEqual(instance1[.FOO], "foo_val_local")
         XCTAssertEqual(instance1[.BAR], "bar_val_local")
 
@@ -75,6 +76,7 @@ final class LGNConfigTests: XCTestCase {
         )
         XCTAssertEqual(instance3.get("FOO"), String?("foo_val_raw_prod"))
         XCTAssertEqual(instance3.get("LUL"), nil)
+        XCTAssertEqual(instance3["LUL"], nil)
         XCTAssertEqual(instance3[.FOO], "foo_val_raw_prod")
         XCTAssertEqual(instance3[.BAR], "bar_val_raw_prod")
     }
