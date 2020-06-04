@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "LGNConfig",
+    name: "lgn-config",
     products: [
         .library(name: "LGNConfig", targets: ["LGNConfig"]),
     ],
