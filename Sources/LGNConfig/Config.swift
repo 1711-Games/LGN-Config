@@ -1,5 +1,4 @@
 import Foundation
-import Logging
 
 public protocol AnyConfigKey: Hashable, RawRepresentable, CaseIterable where RawValue == String {}
 
@@ -14,7 +13,6 @@ public struct Config<Key: AnyConfigKey> {
     }
 
     private let storage: [Key: String]
-    private let logger = Logging.Logger(label: "LGNConfig")
 
     fileprivate init(storage: [Key: String]) {
         self.storage = storage
@@ -56,8 +54,7 @@ public struct Config<Key: AnyConfigKey> {
     /// non-optional result.
     public subscript(key: Key) -> String {
         guard let value = self.storage[key] else {
-            self.logger.critical("Config value for key '\(key)' missing (how is this possible?)")
-            return "__\(key)__MISSING__"
+            fatalError("Config value for key '\(key)' is missing (this must not happen)")
         }
         return value
     }

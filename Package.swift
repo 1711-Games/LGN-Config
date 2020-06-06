@@ -7,16 +7,9 @@ let package = Package(
     products: [
         .library(name: "LGNConfig", targets: ["LGNConfig"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
-    ],
+    dependencies: [],
     targets: [
-        .target(
-            name: "LGNConfig",
-            dependencies: [
-                .product(name: "Logging", package: "swift-log"),
-            ]
-        ),
+        .target(name: "LGNConfig", dependencies: []),
         .testTarget(name: "LGNConfigTests", dependencies: ["LGNConfig"]),
     ]
 )

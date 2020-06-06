@@ -3,13 +3,13 @@ import XCTest
 
 final class LGNConfigTests: XCTestCase {
     func testConfig() {
-        enum ConfigKeys: String, AnyConfigKey {
+        enum ConfigKey: String, AnyConfigKey {
             case FOO
             case BAR
         }
 
         // Local with missing key and empty local values
-        XCTAssertThrowsError(try Config<ConfigKeys>(
+        XCTAssertThrowsError(try Config<ConfigKey>(
             rawConfig: [
                 "FOO": "foo_val_raw"
             ],
@@ -23,7 +23,7 @@ final class LGNConfigTests: XCTestCase {
         }
 
         // Local with empty raw values
-        let instance1 = try! Config<ConfigKeys>(
+        let instance1 = try! Config<ConfigKey>(
             rawConfig: [:],
             isLocal: true,
             localConfig: [
@@ -37,7 +37,7 @@ final class LGNConfigTests: XCTestCase {
         XCTAssertEqual(instance1[.BAR], "bar_val_local")
 
         // Local with empty local values
-        let instance2 = try! Config<ConfigKeys>(
+        let instance2 = try! Config<ConfigKey>(
             rawConfig: [
                 "FOO": "foo_val_raw",
                 "BAR": "bar_val_raw",
@@ -49,7 +49,7 @@ final class LGNConfigTests: XCTestCase {
         XCTAssertEqual(instance2[.BAR], "bar_val_raw")
 
         // Non-local with missing keys and filled local values
-        XCTAssertThrowsError(try Config<ConfigKeys>(
+        XCTAssertThrowsError(try Config<ConfigKey>(
             rawConfig: [:],
             localConfig: [
                 .FOO: "foo_val_local",
@@ -64,7 +64,7 @@ final class LGNConfigTests: XCTestCase {
         }
 
         // Prod with filled local values
-        let instance3 = try! Config<ConfigKeys>(
+        let instance3 = try! Config<ConfigKey>(
             rawConfig: [
                 "FOO": "foo_val_raw_prod",
                 "BAR": "bar_val_raw_prod",
